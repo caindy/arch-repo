@@ -1,8 +1,8 @@
 @startuml
 !define AWS diagrams/AWS/dist
-!includeurl AWS/AWSCommon.puml
-!includeurl AWS/EndUserComputing/all.puml
-!includeurl AWS/Storage/SimpleStorageServiceS3.puml
+!include AWS/AWSCommon.puml
+!include AWS/EndUserComputing/all.puml
+!include AWS/Storage/SimpleStorageServiceS3.puml
 
 actor "Person" as personAlias
 WorkDocs(desktopAlias, "Label", "Technology", "Optional Description")
@@ -10,114 +10,4 @@ SimpleStorageServiceS3(storageAlias, "Label", "Technology", "Optional Descriptio
 
 personAlias --> desktopAlias
 desktopAlias --> storageAlias
-@enduml
-@startuml
-
-skinparam defaultTextAlignment center
-
-!define ICONURL https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/v2.1.0
-
-!includeurl ICONURL/common.puml
-!includeurl ICONURL/devicons/mysql.puml
-!includeurl ICONURL/font-awesome/server.puml
-!includeurl ICONURL/font-awesome-5/database.puml
-
-title Styling example
-
-FA_SERVER(web1,WEB1) #Green
-FA_SERVER(web2,WEB1) #Yellow
-FA_SERVER(web3,WEB1) #Blue
-FA_SERVER(web4,WEB1) #YellowGreen
-
-FA5_DATABASE(db1,LIVE,database,white) #RoyalBlue
-DEV_MYSQL(db2,SPARE,database) #Red
-
-db1 <--> db2
-
-web1 <--> db1
-web2 <--> db1
-web3 <--> db1
-web4 <--> db1
-
-@enduml
-@startuml
-
-skinparam defaultTextAlignment center
-
-!include <tupadr3/common>
-!include <tupadr3/font-awesome-5/server>
-!include <tupadr3/font-awesome-5/gitlab>
-!include <tupadr3/font-awesome/gears>
-!include <tupadr3/font-awesome/fire>
-!include <tupadr3/font-awesome/clock_o>
-!include <tupadr3/font-awesome/lock>
-!include <tupadr3/font-awesome/cloud>
-
-!include <tupadr3/devicons/nginx>
-!include <tupadr3/devicons/mysql>
-!include <tupadr3/devicons/redis>
-!include <tupadr3/devicons/docker>
-!include <tupadr3/devicons/linux>
-
-FA_CLOUD(internet,internet,cloud) #White {
-
-}
-
-DEV_LINUX(debian,Linux,node){
-
-    FA_CLOCK_O(crond,crond) #White
-    FA_FIRE(iptables,iptables) #White
-
-    DEV_DOCKER(docker,docker,node)  {
-        DEV_NGINX(nginx,nginx,node) #White
-        DEV_MYSQL(mysql,mysql,node) #White
-        DEV_REDIS(redis,redis,node) #White
-        FA5_SERVER(nexus,nexus3,node) #White
-        FA5_GITLAB(gitlab,gitlab,node) #White
-        FA_GEARS(gitlabci,gitlab-ci-runner,node) #White
-
-        FA_LOCK(letsencrypt,letsencrypt-client,node) #White
-    }
-}
-
-internet ..> iptables : http
-
-iptables ..> nginx : http
-nginx ..> nexus : http
-nginx ..> gitlab : http
-gitlabci ..> gitlab : http
-gitlab ..> mysql : tcp/ip
-gitlab ..> redis : tcp/ip
-
-crond --> letsencrypt : starts every month
-@enduml
-@startuml
- sprite $bug [15x15/16z] PKzR2i0m2BFMi15p__FEjQEqB1z27aeqCqixa8S4OT7C53cKpsHpaYPDJY_12MHM-BLRyywPhrrlw3qumqNThmXgd1TOterAZmOW8sgiJafogofWRwtV3nCF
- sprite $printer [15x15/8z] NOtH3W0W208HxFz_kMAhj7lHWpa1XC716sz0Pq4MVPEWfBHIuxP3L6kbTcizR8tAhzaqFvXwvFfPEqm0
- sprite $disk {
-   444445566677881
-   436000000009991
-   43600000000ACA1
-   53700000001A7A1
-   53700000012B8A1
-   53800000123B8A1
-   63800001233C9A1
-   634999AABBC99B1
-   744566778899AB1
-   7456AAAAA99AAB1
-   8566AFC228AABB1
-   8567AC8118BBBB1
-   867BD4433BBBBB1
-   39AAAAABBBBBBC1
-}
- 
- title Use of sprites (<$printer>, <$bug>...)
-
- class Example {
- Can have some bug : <$bug>
- Click on <$disk> to save
- }
- 
- note left : The printer <$printer> is available
-
 @enduml
