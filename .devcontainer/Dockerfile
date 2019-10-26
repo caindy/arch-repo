@@ -1,11 +1,13 @@
-FROM payara/micro:5.193.1
+FROM plantuml/plantuml-server:tomcat
 
-USER root
-RUN apk add --no-cache git bash libgcc libstdc++ graphviz fontconfig font-noto 
+ENV ALLOW_PLANTUML_INCLUDE true
 
-COPY plantuml.war $DEPLOY_DIR
-ARG PLANTUML=/usr/sbin/plantuml.sh
-RUN echo "java -jar /opt/payara/payara-micro.jar --deploydir $DEPLOY_DIR" > $PLANTUML
-RUN chmod a+x $PLANTUML
+ARG USERNAME=vscode
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && mkdir -p /home/$USERNAME/.vscode-server /home/$USERNAME/.vscode-server-insiders \
+    && chown ${USER_UID}:${USER_GID} /home/$USERNAME/.vscode-server*
 
-USER payara
+RUN apt update && apt install -y git
