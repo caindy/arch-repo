@@ -1,13 +1,14 @@
-FROM plantuml/plantuml-server:tomcat
+FROM payara/micro
 
 ENV ALLOW_PLANTUML_INCLUDE true
 
-ARG USERNAME=vscode
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && mkdir -p /home/$USERNAME/.vscode-server /home/$USERNAME/.vscode-server-insiders \
-    && chown ${USER_UID}:${USER_GID} /home/$USERNAME/.vscode-server*
+USER root
+# git is needed by VS Code Server
+RUN apk update && apk add --no-cache git \
+    # PlantUML dependencies
+    graphviz font-noto
 
-RUN apt update && apt install -y git
+COPY plantuml.war $DEPLOY_DIR
+RUN echo "nohup java -jar /opt/payara/payara-micro.jar --deploymentDir $DEPLOY_DIR --nocluster >> payara.out 2>&1 &" > /usr/sbin/plantuml.sh
+RUN chmod a+x /usr/sbin/plantuml.sh
+USER payara
