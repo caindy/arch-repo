@@ -1,0 +1,4 @@
+@startuml Hello World
+actor Architecture as A
+A->World: hello
+@enduml
