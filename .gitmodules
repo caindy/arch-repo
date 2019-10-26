@@ -1,3 +1,6 @@
 [submodule "diagrams/C4-PlantUML"]
 	path = diagrams/C4
 	url = git@github.com:caindy/C4-PlantUML.git
+[submodule "diagrams/AWS"]
+	path = diagrams/AWS
+	url = https://github.com/awslabs/aws-icons-for-plantuml.git

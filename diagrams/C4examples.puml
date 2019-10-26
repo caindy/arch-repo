@@ -1,7 +1,7 @@
 @startuml
 !include diagrams/C4/C4_Enterprise.puml
 
-LAYOUT_WITH_LEGEND
+'LAYOUT_WITH_LEGEND
 
 title System Context diagram for Internet Banking System
 
