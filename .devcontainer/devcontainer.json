@@ -22,7 +22,7 @@
 	},
 
 	// Uncomment the next line if you want to publish any ports.
-	"appPort": [8080],
+	"appPort": [],
 
 	// Uncomment the next line to run commands after the container is created.
 	"postCreateCommand": "plantuml.sh",
